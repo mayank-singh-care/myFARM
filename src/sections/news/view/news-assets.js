@@ -1,0 +1,30 @@
+export { default as logo } from '../assets/img/logo/logo.png';
+export { default as w_logo } from '../assets/img/logo/w_logo.png';
+export { default as blog01 } from '../assets/img/blog/blog01.jpg';
+export { default as blog02 } from '../assets/img/blog/blog02.jpg';
+export { default as blog03 } from '../assets/img/blog/blog03.jpg';
+export { default as blog04 } from '../assets/img/blog/blog04.jpg';
+export { default as blog05 } from '../assets/img/blog/blog05.jpg';
+export { default as blog06 } from '../assets/img/blog/blog06.jpg';
+export { default as blog07 } from '../assets/img/blog/blog07.jpg';
+export { default as blog08 } from '../assets/img/blog/blog08.jpg';
+
+export { default as blog14 } from '../assets/img/blog/blog14.jpg';
+export { default as blog15 } from '../assets/img/blog/blog15.jpg';
+export { default as blog16 } from '../assets/img/blog/blog16.jpg';
+export { default as blog17 } from '../assets/img/blog/blog17.jpg';
+export { default as blog18 } from '../assets/img/blog/blog18.jpg';
+export { default as blog19 } from '../assets/img/blog/blog19.jpg';
+export { default as blog20 } from '../assets/img/blog/blog20.jpg';
+export { default as blog21 } from '../assets/img/blog/blog21.jpg';
+export { default as blog22 } from '../assets/img/blog/blog22.jpg';
+export { default as blog23 } from '../assets/img/blog/blog23.jpg';
+export { default as blog24 } from '../assets/img/blog/blog24.jpg';
+export { default as blog25 } from '../assets/img/blog/blog25.jpg';
+export { default as blog26 } from '../assets/img/blog/blog26.jpg';
+export { default as blog27 } from '../assets/img/blog/blog27.jpg';
+export { default as blog28 } from '../assets/img/blog/blog28.jpg';
+export { default as blog29 } from '../assets/img/blog/blog29.jpg';
+export { default as blog30 } from '../assets/img/blog/blog30.jpg';
+
+export { default as advertisement } from '../assets/img/others/advertisement.png';
