@@ -1,154 +1,166 @@
 import { useState } from 'react';
 
+import Avatar from '@mui/material/Avatar';
+import CssBaseline from '@mui/material/CssBaseline';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import LoadingButton from '@mui/lab/LoadingButton';
-import { alpha, useTheme } from '@mui/material/styles';
-import InputAdornment from '@mui/material/InputAdornment';
 
 import { useRouter } from 'src/routes/hooks';
 
-import { bgGradient } from 'src/theme/css';
-
-import Logo from 'src/components/logo';
-import Iconify from 'src/components/iconify';
+import { FirstForm } from 'src/sections/login';
+import { SecondForm } from 'src/sections/login';
+import { ThirdForm } from 'src/sections/login';
+import { FourthForm } from 'src/sections/login';
+import { FifthForm } from 'src/sections/login';
 
 // ----------------------------------------------------------------------
 
 export default function LoginView() {
-  const theme = useTheme();
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    landTitle: '',
+    location: '',
+    area: '',
+    description: '',
+    cropType: '',
+    variety: '',
+    plantingDate: '',
+    harvestDate: '',
+    acreage: '',
+    yield: '',
+    cattleType: '',
+    noOfHead: '',
+    age: '',
+    productionMetrics: '',
+    equipmentType: '',
+    modal: '',
+    snNumber: '',
+    year: '',
+    condition: '',
+    usageHistory: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleNextStep = () => {
+    setStep((prevStep) => prevStep + 1);
+  };
+
+  const handlePrevStep = () => {
+        setStep((prevStep) => prevStep - 1);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
+    };
 
   const router = useRouter();
-
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = () => {
     router.push('/dashboard');
   };
 
-  const renderForm = (
-    <>
-      <Stack spacing={3}>
-        <TextField name="email" label="Email address" />
-
-        <TextField
-          name="password"
-          label="Password"
-          type={showPassword ? 'text' : 'password'}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                  <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Stack>
-
-      <Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ my: 3 }}>
-        <Link variant="subtitle2" underline="hover">
-          Forgot password?
-        </Link>
-      </Stack>
-
-      <LoadingButton
-        fullWidth
-        size="large"
-        type="submit"
-        variant="contained"
-        color="inherit"
-        onClick={handleClick}
-      >
-        Login
-      </LoadingButton>
-    </>
-  );
-
   return (
-    <Box
-      sx={{
-        ...bgGradient({
-          color: alpha(theme.palette.background.default, 0.9),
-          imgUrl: '/assets/background/overlay_4.jpg',
-        }),
-        height: 1,
-      }}
-    >
-      <Logo
+    <Grid container style={{ overflow: 'auto' }} component="main" sx={{ height: '100vh' }}>
+      <CssBaseline />
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={7}
         sx={{
-          position: 'fixed',
-          top: { xs: 16, md: 24 },
-          left: { xs: 16, md: 24 },
+          backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: (t) =>
+            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       />
-
-      <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
-        <Card
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={5}
+        sx={{ height: 'auto' }}
+        component={Paper}
+        elevation={6}
+        square
+      >
+        <Box
           sx={{
-            p: 5,
-            width: 1,
-            maxWidth: 420,
+            my: 8,
+            mx: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          <Typography variant="h4">Sign in to Minimal</Typography>
-
-          <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
-            Don’t have an account?
-            <Link variant="subtitle2" sx={{ ml: 0.5 }}>
-              Get started
-            </Link>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
           </Typography>
 
-          <Stack direction="row" spacing={2}>
-            <Button
-              fullWidth
-              size="large"
-              color="inherit"
-              variant="outlined"
-              sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
-            >
-              <Iconify icon="eva:google-fill" color="#DF3E30" />
-            </Button>
-
-            <Button
-              fullWidth
-              size="large"
-              color="inherit"
-              variant="outlined"
-              sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
-            >
-              <Iconify icon="eva:facebook-fill" color="#1877F2" />
-            </Button>
-
-            <Button
-              fullWidth
-              size="large"
-              color="inherit"
-              variant="outlined"
-              sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
-            >
-              <Iconify icon="eva:twitter-fill" color="#1C9CEA" />
-            </Button>
-          </Stack>
-
-          <Divider sx={{ my: 3 }}>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              OR
-            </Typography>
-          </Divider>
-
-          {renderForm}
-        </Card>
-      </Stack>
-    </Box>
+          <div>
+            {step === 1 && (
+              <FirstForm
+                formData={formData}
+                handleChange={handleChange}
+                handleNextStep={handleNextStep}
+              />
+            )}
+            {step === 2 && (
+              <SecondForm
+                formData={formData}
+                handleChange={handleChange}
+                handleNextStep={handleNextStep}
+                handlePrevStep={handlePrevStep}
+              />
+            )}
+            {step === 3 && (
+              <ThirdForm
+                formData={formData}
+                handleChange={handleChange}
+                handleNextStep={handleNextStep}
+                handlePrevStep={handlePrevStep}
+              />
+            )}
+            {step === 4 && (
+              <FourthForm
+                formData={formData}
+                handleChange={handleChange}
+                handleNextStep={handleNextStep}
+                handlePrevStep={handlePrevStep}
+              />
+            )}
+            {step === 5 && (
+              <FifthForm
+                formData={formData}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                handlePrevStep={handlePrevStep}
+              />
+            )}
+          </div>
+        </Box>
+      </Grid>
+    </Grid>
   );
 }
