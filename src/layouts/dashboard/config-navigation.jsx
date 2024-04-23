@@ -35,7 +35,7 @@ const navConfig = [
   {
     title: 'chatbot',
     path: '/chatbot',
-    icon: icon('ic_blog'),
+    icon: icon('ic_chat'),
   },
   {
     title: 'login',

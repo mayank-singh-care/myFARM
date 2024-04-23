@@ -22,7 +22,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@faker-js/faker": "^8.1.0",
+    "@faker-js/faker": "^8.4.1",
     "@google/generative-ai": "^0.6.0",
     "@iconify/react": "^4.1.1",
     "@mui/icons-material": "^5.15.15",
@@ -33,6 +33,7 @@
     "history": "^5.3.0",
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
+    "mdb-react-ui-kit": "^8.0.0",
     "numeral": "^2.0.6",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

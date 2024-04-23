@@ -18,7 +18,7 @@ import SvgColor from 'src/components/svg-color';
 // ----------------------------------------------------------------------
 
 export default function PostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
+  const { cover, title, link, view, comment, share, author, createdAt } = post;
 
   const latestPostLarge = index === 0;
 
@@ -48,6 +48,8 @@ export default function PostCard({ post, index }) {
 
   const renderTitle = (
     <Link
+      href={link}
+      target="_blank"
       color="inherit"
       variant="subtitle2"
       underline="hover"

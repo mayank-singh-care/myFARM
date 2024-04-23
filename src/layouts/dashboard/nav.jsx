@@ -83,7 +83,7 @@ export default function Nav({ openNav, onCloseNav }) {
           <Typography variant="h6">Help Center</Typography>
 
           <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
-            From only $69
+            Having trouble in myFARM, please contact us from for more questions.
           </Typography>
         </Box>
 

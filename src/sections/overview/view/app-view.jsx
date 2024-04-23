@@ -13,6 +13,9 @@ import AppCurrentVisits from '../app-current-visits';
 import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
 import AppConversionRates from '../app-conversion-rates';
+import AppTemprature from '../app-temperature';
+import AppLandView from '../app-land-view';
+// import AppWeather from '../app-weather';
 
 // ----------------------------------------------------------------------
 
@@ -116,6 +119,27 @@ export default function AppView() {
           />
         </Grid>
 
+        <Grid xs={12} md={6} lg={6}>
+          <AppTemprature title="Temperature" />
+        </Grid>
+        <Grid xs={12} md={6} lg={6}>
+          <AppTemprature title="Temperature" />
+        </Grid>
+        <Grid xs={12} md={6} lg={6}>
+          <AppTemprature title="Temperature" />
+        </Grid>
+        <Grid xs={12} md={6} lg={6}>
+          <AppTemprature title="Temperature" />
+        </Grid>
+        
+        <Grid xs={12} md={12} lg={12}>
+          <AppLandView title="LandView" />
+        </Grid>
+        
+        {/* <Grid xs={12} md={12} lg={12}>
+          <AppWeather/>
+        </Grid> */}
+
         <Grid xs={12} md={6} lg={8}>
           <AppConversionRates
             title="Conversion Rates"
@@ -156,11 +180,13 @@ export default function AppView() {
             list={[...Array(5)].map((_, index) => ({
               id: faker.string.uuid(),
               title: [
-                '1983, orders, $4220',
-                '12 Invoices have been paid',
-                'Order #37745 from September',
-                'New order placed #XF-2356',
-                'New order placed #XF-2346',
+                'Germination',
+                'Seedling Stage',
+                'Vegetative Stage',
+                'Flowering Stage',
+                'Fruiting/Podding/Cob Formation Stage',
+                'Maturation Stage',
+                'Senescence (Ripening) Stage'
               ][index],
               type: `order${index + 1}`,
               time: faker.date.past(),
@@ -172,11 +198,13 @@ export default function AppView() {
           <AppTasks
             title="Tasks"
             list={[
-              { id: '1', name: 'Create FireStone Logo' },
-              { id: '2', name: 'Add SCSS and JS files if required' },
-              { id: '3', name: 'Stakeholder Meeting' },
-              { id: '4', name: 'Scoping & Estimations' },
-              { id: '5', name: 'Sprint Showcase' },
+              { id: '1', name: 'Tilling and Land Preparation' },
+              { id: '2', name: 'Field Drainage and Irrigation System Setup' },
+              { id: '3', name: 'Seed Selection' },
+              { id: '4', name: 'Sowing or Transplanting' },
+              { id: '5', name: 'Maintaining Plant Spacing' },
+              { id: '6', name: 'Weed Control (Manual, Mechanical, or Chemical)' },
+              { id: '7', name: 'Fertilization Based on Soil Test Recommendations' },
             ]}
           />
         </Grid>

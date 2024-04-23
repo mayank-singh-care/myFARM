@@ -11,11 +11,13 @@ import CardHeader from '@mui/material/CardHeader';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 import Iconify from 'src/components/iconify';
+import TextField from '@mui/material/TextField';
 
 // ----------------------------------------------------------------------
 
 export default function AnalyticsTasks({ title, subheader, list, ...other }) {
   const [selected, setSelected] = useState(['2']);
+  const [tasks, setTasks] = useState(list);
 
   const handleClickComplete = (taskId) => {
     const tasksCompleted = selected.includes(taskId)
@@ -29,12 +31,13 @@ export default function AnalyticsTasks({ title, subheader, list, ...other }) {
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
-      {list.map((task) => (
+      {tasks.map((task) => (
         <TaskItem
           key={task.id}
           task={task}
           checked={selected.includes(task.id)}
           onChange={() => handleClickComplete(task.id)}
+          setTasks={setTasks}
         />
       ))}
     </Card>
@@ -49,8 +52,10 @@ AnalyticsTasks.propTypes = {
 
 // ----------------------------------------------------------------------
 
-function TaskItem({ task, checked, onChange }) {
+function TaskItem({ task, checked, onChange, setTasks }) {
   const [open, setOpen] = useState(null);
+  const [isEdit, setIsEdit] = useState(false); // New state for edit mode
+  const [editText, setEditText] = useState(task.name);
 
   const handleOpenMenu = (event) => {
     setOpen(event.currentTarget);
@@ -60,24 +65,30 @@ function TaskItem({ task, checked, onChange }) {
     setOpen(null);
   };
 
-  const handleMarkComplete = () => {
-    handleCloseMenu();
-    console.info('MARK COMPLETE', task.id);
-  };
-
-  const handleShare = () => {
-    handleCloseMenu();
-    console.info('SHARE', task.id);
-  };
-
   const handleEdit = () => {
     handleCloseMenu();
+    setIsEdit(!isEdit);
+    setEditText(task.name);
     console.info('EDIT', task.id);
   };
 
   const handleDelete = () => {
     handleCloseMenu();
+    setTasks((prev) => prev.filter((t) => t.id !== task.id));
     console.info('DELETE', task.id);
+  };
+
+  const handleSave = () => {
+    // Update task data with edited text (implement logic for updating data source)
+    setTasks((prevTasks) =>
+      prevTasks.map((t) => (t.id === task.id ? { ...t, name: editText } : t))
+    );
+    setIsEdit(false);
+  };
+
+  const handleCancel = () => {
+    setIsEdit(false);
+    setEditText(task.name); // Reset edit text on cancel
   };
 
   return (
@@ -100,13 +111,35 @@ function TaskItem({ task, checked, onChange }) {
       >
         <FormControlLabel
           control={<Checkbox checked={checked} onChange={onChange} />}
-          label={task.name}
+          label={
+            isEdit ? (
+              <TextField
+                autoFocus
+                value={editText}
+                onChange={(e) => setEditText(e.target.value)}
+                onBlur={handleSave} // Save on blur if outside click
+              />
+            ) : (
+              task.name
+            )
+          }
           sx={{ flexGrow: 1, m: 0 }}
         />
 
         <IconButton color={open ? 'inherit' : 'default'} onClick={handleOpenMenu}>
           <Iconify icon="eva:more-vertical-fill" />
         </IconButton>
+
+        {isEdit && ( // Show save and cancel buttons only in edit mode
+          <>
+            <IconButton color="primary" onClick={handleSave}>
+              <Iconify icon="eva:checkmark-fill" />
+            </IconButton>
+            <IconButton color="error" onClick={handleCancel}>
+              <Iconify icon="eva:close-fill" />
+            </IconButton>
+          </>
+        )}
       </Stack>
 
       <Popover
@@ -116,19 +149,9 @@ function TaskItem({ task, checked, onChange }) {
         anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem onClick={handleMarkComplete}>
-          <Iconify icon="eva:checkmark-circle-2-fill" sx={{ mr: 2 }} />
-          Mark Complete
-        </MenuItem>
-
         <MenuItem onClick={handleEdit}>
           <Iconify icon="solar:pen-bold" sx={{ mr: 2 }} />
           Edit
-        </MenuItem>
-
-        <MenuItem onClick={handleShare}>
-          <Iconify icon="solar:share-bold" sx={{ mr: 2 }} />
-          Share
         </MenuItem>
 
         <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
